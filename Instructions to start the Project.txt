@@ -1,0 +1,18 @@
+Implementation of the Blog:-
+Prerequisites = Installation of Python, MongoDB community server and Bottle Framework (more info on bottlepy.org).
+1. Keep all the files and folders just the way it is in a single folder. This is important.
+2. Unzip posts.7zip using 7zip unzip tool. You will get a JSON file with many posts stored in document format.
+3. Start mongod server. Open a mongo shell.
+4. In mongo shell type following command to start a new database "blog".
+	>use blog
+5. Open a new command prompt. Go to the folder where the files and JSON document posts is kept.
+6. Use the following command to import the JSON document data into the database blog in a newly created collection posts.
+	 >mongoimport --db blog --collection posts --type json posts.json
+7. After the JSON document has been imported successfully, we just have to start the Blog program. This can be done by executing the following command from the same folder where the files are located:-
+	>python blog.py
+8. Once the program is successfully executed and running, open your web browser and open the local IP address: http://localhost:8080
+9. You can see the blog with some fictional blogs and the names of the authors with tags,etc.
+10. Some aggregation we can implement on the collection are given below:-
+	>db.posts.aggregate( { $unwind : "$comments" }, { $group : { _id : "$comments.author", count : { $sum : 1} } }, {$sort: {"count" : 1}} );
+
+You can perform other functions to your liking and improve on the project.	 
